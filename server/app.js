@@ -1,6 +1,6 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-import authenticationRoute from './routes/authentication.js'
+import authenticationRoute from './routes/authentication'
 const app = express()
 const port = 3000
 
