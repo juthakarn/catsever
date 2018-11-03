@@ -23,10 +23,8 @@ app.post('/user',(req,res)=>{
       name:'something',
       surname:'something'
     }*/     
-
     const {name,surname} = req.body;
- 
-
-    res.send(`hello:${name} ${surname}`)
+    console.log(name)
+    res.send({hello:name})
 
 })
