@@ -1,6 +1,6 @@
 require('babel-register')({
-    presets: [ 'env' ]
-})
+  presets: ['env'],
+});
 
 // Import the rest of our application.
-module.exports = require('./app.js')
+module.exports = require('./app.js');
