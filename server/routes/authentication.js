@@ -6,15 +6,22 @@ export default (app, route) => {
     res.send('helloworld');
   });
 
-  app.post('/user', (req, res) => {
-    // localhost:3000/user method post
-    /* {
-                                                                        name:'something',
-                                                                        surname:'something'
-                                                                      } */
-
-
-    const { name, surname } = req.body;
+  app.post('/authentication/signup', (req, res) => {
+    const { name, surname, email, password } = req.body;
+    if (name && surname && email && password) {
+      User.findOne({
+        where: {
+          email: email
+        }
+      }).then(result => {
+        if (!result) {
+          User.create(req.body)
+          res.send('success')
+        }
+        res.send('email is use already')
+      })
+    }
+    res.send('error')
     console.log(name);
     res.send({ hello: name });
   });
