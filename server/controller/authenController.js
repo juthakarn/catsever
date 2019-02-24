@@ -1,64 +1,42 @@
 import jwt from 'jsonwebtoken';
-import { User } from '../../provider/service';
+import { users } from '../../models'
+import { EMAIL, generateToken } from '../utils/regex';
 
 export const signup = async (req, res) => {
-  const {
-    name, surname, email, password,
-  } = req.body;
-  if (name && surname && email && password) {
-    const result = await User.findOne({
-      where: {
-        email,
-      },
-    });
-    if (!result) {
-      User.create(req.body);
-      const response = await User.findOne({
-        where: {
-          email,
-          password,
-        },
-      });
-      const token = jwt.sign({ response }, 'cat');
-      res.send(token);
+  const { body } = req;
+  if (body) {
+    const { email, password, firstname, lastname } = body;
+    if (email && password && firstname && lastname) {
+      const already = await users.findOne({ where: { email: email } });
+      if (already) {
+        res.status(500).send({ message: "email is already use" });
+      }
+      const emailValidation = EMAIL.test(email);
+      if (emailValidation) {
+        const createUser = await users.create(body);
+        const token = generateToken(createUser);
+        res.status(200).send({ message: "success", token });
+      }
+      res.status(500).send({ message: "Email is not Provide" });
     }
-    res.send('email is use already');
+    res.status(500).send({ message: "empty field" });
   }
+  res.status(500).send({ message: "empty field" });
+};
 
-  // console.log(name);
-  // res.send({ hello: name });
+export const getdetail = async (req, res) => {
+  const {user} = req
+  console.log(user)
+ res.status(200).json(user)
 };
-export const getCurUser = async (req, res) => {
-  const id = req.params.id;
-  const result = await User.findOne({
-    where: {
-      id,
-    },
-  });
-  const token = jwt.sign({ result }, 'cat');
-  res.send(token);
-};
+
 export const getTakeToken = (req, res) => {
   const { token } = req.params;
   const result = jwt.verify(token, 'cat');
   res.send(result);
 };
-export const signin = async (req, res) => {
-  const { email, password } = req.body;
-  if (email && password) {
-    const result = await User.findOne({
-      where: {
-        email,
-        password,
-      },
-    });
-    if (!result) {
-      console.log('res', result);
-      res.send('Not regist already?Please Signup');
-    }
-    const token = jwt.sign({ result }, 'cat');
-    console.log('tt', token);
-    res.send(token);
-  }
-  res.send('We cannot found your email or password');
+
+export const signin = (req, res) => {
+  const { user } = req;
+  res.status(200).json({ message: "success", token: generateToken(user) });
 };

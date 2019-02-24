@@ -5,18 +5,28 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server/server.js"
+    "start": "nodemon server/server.js",
+    "model:init": "node_modules/.bin/sequelize init",
+    "model:migrate": "node_modules/.bin/sequelize db:migrate",
+    "model:seedall": "node_modules/.bin/sequelize db:seed:all",
+    "createmodel": "npm-run-all --parallel createmodel:*",
+    "createmodel:user": "node_modules/.bin/sequelize model:generate --name users --attributes password:string,firstname:string,lastname:string,email:string"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.2",
+    "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
     "mysql2": "^1.6.3",
-    "sequelize": "^4.41.1"
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "sequelize": "^4.41.1",
+    "sequelize-cli": "^5.4.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
