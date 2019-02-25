@@ -10,7 +10,8 @@
     "model:migrate": "node_modules/.bin/sequelize db:migrate",
     "model:seedall": "node_modules/.bin/sequelize db:seed:all",
     "createmodel": "npm-run-all --parallel createmodel:*",
-    "createmodel:user": "node_modules/.bin/sequelize model:generate --name users --attributes password:string,firstname:string,lastname:string,email:string"
+    "createmodel:user": "node_modules/.bin/sequelize model:generate --name users --attributes password:string,firstname:string,lastname:string,email:string",
+    "createmodel:findcats": "node_modules/.bin/sequelize model:generate --name findcats --attributes latitude:double,longitude:double,address:string,contact:string,message:string,imagepath:string"
   },
   "author": "",
   "license": "ISC",
@@ -18,9 +19,10 @@
     "bcrypt": "^3.0.2",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.18.3",
-    "cors": "^2.8.4",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
+    "multer": "^1.4.1",
     "mysql2": "^1.6.3",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
