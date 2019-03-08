@@ -12,6 +12,8 @@ services:
     ports:
       - 3000:3000
     command: 'npm start'
+    links:
+      - mysql
   mysql:
     image: mysql
     container_name: mysql
