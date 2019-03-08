@@ -8,7 +8,7 @@ FROM node:10-slim
 COPY package.json .
 
 ENV TZ=America/Los_Angeles
-
+RUN npm install -g nodemon
 RUN npm install
 WORKDIR ./
 
