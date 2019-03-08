@@ -1,0 +1,15 @@
+FROM node:10-slim
+
+# RUN apk --no-cache add --virtual native-deps \
+#   g++ gcc libgcc libstdc++ linux-headers autoconf automake make nasm python git && \
+#   npm install --quiet node-gyp -g
+
+
+COPY package.json .
+
+ENV TZ=America/Los_Angeles
+
+RUN npm install
+WORKDIR ./
+
+COPY . .
