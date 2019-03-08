@@ -1,0 +1,10 @@
+FROM node:8-alpine
+
+COPY ./package.json .
+
+ENV TZ=America/Los_Angeles
+
+RUN npm install
+WORKDIR ./
+
+COPY . .
