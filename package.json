@@ -11,7 +11,8 @@
     "model:seedall": "node_modules/.bin/sequelize db:seed:all",
     "createmodel": "npm-run-all --parallel createmodel:*",
     "createmodel:user": "node_modules/.bin/sequelize model:generate --name users --attributes password:string,firstname:string,lastname:string,email:string",
-    "createmodel:findcats": "node_modules/.bin/sequelize model:generate --name findcats --attributes latitude:double,longitude:double,address:string,contact:string,message:string,imagepath:string"
+    "createmodel:findcats": "node_modules/.bin/sequelize model:generate --name findcats --attributes latitude:double,longitude:double,address:string,contact:string,message:string,imagepath:string",
+    "createmodel:news": "node_modules/.bin/sequelize model:generate --name news --attributes title:string,subtitle:string,content:string,image:string"
   },
   "author": "",
   "license": "ISC",

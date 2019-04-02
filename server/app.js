@@ -1,7 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 const path = require('path')
-import { findcats } from '../models'
+import { findcats, news } from '../models'
 import cors from 'cors'
 const fs = require('fs')
 var multer = require('multer')
@@ -50,6 +50,11 @@ app.post('/cat',upload.array('photo',3), async (req, res) => {
 app.get('/catlist', async(req,res)=>{
 	const allFindCats = await findcats.findAll()
 	res.status(200).json({message:'success',allFindCats})
+})
+
+app.get('/news',async(req,res)=>{
+	const newsList = await news.findAll()
+	res.status(200).json({message:'success',newsList})
 })
 
 /* Router */
