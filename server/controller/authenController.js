@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken';
-import { users } from '../../models'
-import { EMAIL, generateToken } from '../utils/regex';
+import { users, appointment } from '../../models'
+import moment from 'moment-timezone'
+import { Op } from 'sequelize'
+import { EMAIL, generateToken, degenerateToken } from '../utils/regex';
 
 export const signup = async (req, res) => {
   const { body } = req;
@@ -25,9 +27,9 @@ export const signup = async (req, res) => {
 };
 
 export const getdetail = async (req, res) => {
-  const {user} = req
+  const { user } = req
   console.log(user)
- res.status(200).json(user)
+  res.status(200).json(user)
 };
 
 export const getTakeToken = (req, res) => {
@@ -40,3 +42,38 @@ export const signin = (req, res) => {
   const { user } = req;
   res.status(200).json({ message: "success", token: generateToken(user) });
 };
+
+export const AddAppointment = async (req, res) => {
+  const { authorization } = req.headers
+  const { sub } = degenerateToken(authorization)
+  const { dateValue, hospital, detail } = req.body
+  const payload = {
+    userid: sub,
+    date: dateValue,
+    hospital,
+    detail
+  }
+  await appointment.create(payload)
+  const appointmentList = await appointment.findAll({
+    where: {
+      userid: sub, date: {
+        [Op.gt]: moment().tz('Asia/Bangkok').startOf('days')
+      }
+    }
+  })
+  res.send(appointmentList)
+}
+
+export const getAllAppointment = async (req, res) => {
+  const { authorization } = req.headers
+  const { sub } = degenerateToken(authorization)
+  console.log(moment().tz('Asia/Bangkok').startOf('days'))
+  const appointmentList = await appointment.findAll({
+    where: {
+      userid: sub, date: {
+        [Op.gt]: moment().tz('Asia/Bangkok').startOf('days')
+      }
+    }
+  })
+  res.send(appointmentList)
+}

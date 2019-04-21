@@ -4,20 +4,23 @@
     "password": "isylzjkoot",
     "database": "catserver",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "timezone": "Asia/Bangkok"
   },
   "test": {
     "username": "root",
     "password": "isylzjkoot",
     "database": "catserver",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "timezone": "Asia/Bangkok"
   },
   "production": {
     "username": "root",
     "password": "isylzjkoot",
     "database": "catserver",
     "host": "mysql",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "timezone": "Asia/Bangkok"
   }
 }

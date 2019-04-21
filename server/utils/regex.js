@@ -10,3 +10,8 @@ export const generateToken = payload => {
 	const token = jwt.sign({ sub: id, iat: timestamp }, TOKEN_SECRET_KEY)
 	return token
 }
+
+export const degenerateToken = payload => {
+	const data = jwt.verify(payload, TOKEN_SECRET_KEY)
+	return data
+}
