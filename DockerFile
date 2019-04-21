@@ -7,7 +7,7 @@ FROM node:10-slim
 
 COPY package.json .
 
-ENV TZ=America/Los_Angeles
+ENV TZ=Asia/Bangkok
 RUN yarn global add nodemon
 RUN yarn install
 WORKDIR ./
