@@ -23,7 +23,6 @@ export const signup = async (req, res) => {
     }
     res.status(500).send({ message: "empty field" });
   }
-  res.status(500).send({ message: "empty field" });
 };
 
 export const getdetail = async (req, res) => {
