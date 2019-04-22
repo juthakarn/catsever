@@ -36,8 +36,6 @@ const upload = multer({  limits: { fieldSize: 25 * 1024 * 1024 }, storage: Stora
 app.post('/cat',upload.array('photo',3), async (req, res) => {
 	const file = req.files[0]
 	const body = req.body
-	console.log(file)
-	console.log(req.body)
 	const imagepath = file.filename
 	const  result = await findcats.create({
 		...body,
