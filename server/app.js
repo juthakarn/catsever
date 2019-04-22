@@ -31,7 +31,7 @@ const Storage = multer.diskStorage({
 		callback(null, `${file.fieldname}_${Date.now()}_${file.originalname}`)
 	},
 })
-const upload = multer({ storage: Storage })
+const upload = multer({  limits: { fieldSize: 25 * 1024 * 1024 }, storage: Storage })
 
 app.post('/cat',upload.array('photo',3), async (req, res) => {
 	const file = req.files[0]
