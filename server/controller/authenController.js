@@ -24,7 +24,12 @@ export const signup = async (req, res) => {
     res.status(500).send({ message: "empty field" });
   }
 };
-
+export const getUser = async (req,res)=>{
+  const { authorization } = req.headers
+  const { sub } = degenerateToken(authorization)
+  const user =  await users.findOne({where:{id:sub}})
+  res.send({message:'success',user:user})
+}
 export const getdetail = async (req, res) => {
   const { user } = req
   console.log(user)
