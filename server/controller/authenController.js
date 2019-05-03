@@ -78,6 +78,5 @@ export const getAllAppointment = async (req, res) => {
       }
     }
   })
-  console.log(appointmentList)
   res.send(appointmentList)
 }
