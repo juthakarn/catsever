@@ -58,25 +58,28 @@ export const AddAppointment = async (req, res) => {
     detail
   }
   await appointment.create(payload)
-  const appointmentList = await appointment.findAll({
-    where: {
-      userid: sub, date: {
-        [Op.gt]: moment().tz('Asia/Bangkok').startOf('days')
-      }
-    }
-  })
+  // const appointmentList = await appointment.findAll({
+  //   where: {
+  //     userid: sub, date: {
+  //       [Op.gt]: moment().tz('Asia/Bangkok').startOf('days')
+  //     }
+  //   }
+  // })
+  const appointmentList = await appointment.findAll()
   res.send(appointmentList)
 }
 
 export const getAllAppointment = async (req, res) => {
   const { authorization } = req.headers
   const { sub } = degenerateToken(authorization)
-  const appointmentList = await appointment.findAll({
-    where: {
-      userid: sub, date: {
-        [Op.gte]: moment().tz('Asia/Bangkok').startOf('days')
-      }
-    }
-  })
+  const appointmentList = await appointment.findAll()
+
+  // const appointmentList = await appointment.findAll({
+  //   where: {
+  //     userid: sub, date: {
+  //       [Op.gte]: moment().tz('Asia/Bangkok').startOf('days')
+  //     }
+  //   }
+  // })
   res.send(appointmentList)
 }
