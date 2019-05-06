@@ -50,6 +50,16 @@ app.get('/catlist', async(req,res)=>{
 	res.status(200).json({message:'success',allFindCats})
 })
 
+app.delete('/catlist/:id', async(req,res)=>{
+	const {id} = req.params
+ 	const data = await findcats.destroy({
+		where: {
+			id: id
+		}
+	});
+	console.log(data)
+})
+
 app.get('/news',async(req,res)=>{
 	const newsList = await news.findAll()
 	res.status(200).json({message:'success',newsList})
