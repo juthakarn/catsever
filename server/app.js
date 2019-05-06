@@ -58,6 +58,7 @@ app.delete('/catlist/:id', async(req,res)=>{
 		}
 	});
 	console.log(data)
+	res.send(data)
 })
 
 app.get('/news',async(req,res)=>{
