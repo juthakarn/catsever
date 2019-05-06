@@ -52,13 +52,13 @@ app.get('/catlist', async(req,res)=>{
 
 app.delete('/catlist/:id', async(req,res)=>{
 	const {id} = req.params
- 	const data = await findcats.destroy({
+	await findcats.destroy({
 		where: {
 			id: id
 		}
 	});
-	console.log(data)
-	res.send(data)
+	const allFindCats = await findcats.findAll()
+	res.status(200).json({message:'success',allFindCats})
 })
 
 app.get('/news',async(req,res)=>{
